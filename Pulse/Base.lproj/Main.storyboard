@@ -1,24 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Courier.ttc">
+            <string>Courier</string>
+            <string>Courier-Bold</string>
+            <string>Courier-BoldOblique</string>
+            <string>Courier-Oblique</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" userLabel="Welcome View Controller" customClass="WelcomeViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="IP8-4G-kdd">
+                                <rect key="frame" x="161" y="34" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="IP8-4G-kdd" secondAttribute="height" multiplier="1:1" id="Jt7-iz-Di2"/>
+                                    <constraint firstAttribute="height" constant="200" id="vld-d8-jn2"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use the app on your watch to check the heart rate..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeI-Tb-3I7">
+                                <rect key="frame" x="14" y="100" width="133" height="68"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with your Pulse" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEM-qb-ddt">
+                                <rect key="frame" x="14" y="630" width="347" height="17"/>
+                                <fontDescription key="fontDescription" name="Courier-Oblique" family="Courier" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSm-aE-aAw">
+                                <rect key="frame" x="361" y="248" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IP8-4G-kdd" secondAttribute="trailing" constant="14" id="4RR-Wr-scI"/>
+                            <constraint firstItem="eeI-Tb-3I7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="NhZ-fH-EDH"/>
+                            <constraint firstItem="IP8-4G-kdd" firstAttribute="leading" secondItem="eeI-Tb-3I7" secondAttribute="trailing" constant="14" id="Pij-SP-2Xq"/>
+                            <constraint firstItem="MSm-aE-aAw" firstAttribute="top" secondItem="IP8-4G-kdd" secondAttribute="bottom" constant="14" id="Xh5-CG-Wmp"/>
+                            <constraint firstItem="VEM-qb-ddt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="YXW-KG-gc8"/>
+                            <constraint firstItem="eeI-Tb-3I7" firstAttribute="centerY" secondItem="IP8-4G-kdd" secondAttribute="centerY" id="fBm-N8-gRg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VEM-qb-ddt" secondAttribute="trailing" constant="14" id="hwu-s8-DNy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MSm-aE-aAw" secondAttribute="trailing" constant="14" id="o2u-vx-RcP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VEM-qb-ddt" secondAttribute="bottom" constant="20" id="oMd-ZM-KZx"/>
+                            <constraint firstItem="IP8-4G-kdd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="14" id="xEQ-Ne-Nhj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="heartImageView" destination="IP8-4G-kdd" id="NL9-rU-ynD"/>
+                        <outlet property="heartRateLabel" destination="MSm-aE-aAw" id="nzk-Hu-mfo"/>
+                        <outlet property="hintLabel" destination="eeI-Tb-3I7" id="gmH-TW-qz7"/>
+                        <segue destination="RCg-oo-3a5" kind="show" identifier="showHome" id="RQK-SL-ibB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-239.19999999999999" y="116.49175412293854"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Zkp-Bn-ktN">
+            <objects>
+                <viewController id="RCg-oo-3a5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NAH-gg-m7e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success. You did it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8La-BZ-WT9">
+                                <rect key="frame" x="85.5" y="325" width="204.5" height="17"/>
+                                <fontDescription key="fontDescription" name="Courier-BoldOblique" family="Courier" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8La-BZ-WT9" firstAttribute="centerY" secondItem="NAH-gg-m7e" secondAttribute="centerY" id="FNq-RY-v9l"/>
+                            <constraint firstItem="8La-BZ-WT9" firstAttribute="centerX" secondItem="NAH-gg-m7e" secondAttribute="centerX" id="dBr-yb-OSP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yz0-ec-Ane"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YzO-iS-5zN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="594" y="116"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart" width="681" height="681"/>
+    </resources>
 </document>

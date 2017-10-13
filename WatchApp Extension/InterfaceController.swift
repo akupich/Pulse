@@ -7,8 +7,6 @@
 //
 
 import WatchKit
-import Foundation
-import HealthKit
 
 class InterfaceController: WKInterfaceController {
 
@@ -17,153 +15,71 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet private weak var heart: WKInterfaceImage!
     @IBOutlet private weak var startStopButton : WKInterfaceButton!
     
-    let healthStore = HKHealthStore()
-    
-    //State of the app - is the workout activated
-    var workoutActive = false
-    
-    // define the activity type and location
-    var session : HKWorkoutSession?
-    let heartRateUnit = HKUnit(from: "count/min")
-    //var anchor = HKQueryAnchor(fromValue: Int(HKAnchoredObjectQueryNoAnchor))
-    var currenQuery : HKQuery?
+    var workoutVM: WorkoutViewModel?
+    var heartVM: HeartRateAnalyzer?
+    let conectivityClient = ConnectivityManager ()
     
     override func willActivate() {
         super.willActivate()
         
-        guard HKHealthStore.isHealthDataAvailable() == true else {
-            rateLabel.setText("not available")
-            return
+        setupWorkoutSession()
+    }
+    
+    func setupWorkoutSession () {
+        workoutVM = WorkoutViewModel()
+        workoutVM?.didStart = { [weak self] date in
+            self?.setupHeartRateStreaming(with: date)
         }
-        
-        guard let quantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else {
-            displayNotAllowed()
-            return
-        }
-        
-        let dataTypes = Set(arrayLiteral: quantityType)
-        healthStore.requestAuthorization(toShare: nil, read: dataTypes) { (success, error) -> Void in
-            if success == false {
-                self.displayNotAllowed()
+        workoutVM?.didEnd = { [weak self] date in
+            DispatchQueue.main.async { [weak self] in
+                self?.rateLabel.setText("---")
             }
         }
+    }
+    
+    func setupHeartRateStreaming (with date:Date) {
+        if let heartVM = HeartRateAnalyzer(date: date) {
+            heartVM.didUpdate = { [weak self] (heartRate, device) in
+                DispatchQueue.main.async { [weak self] in
+                    self?.updated(with: heartRate, from: device)
+                }
+            }
+            self.heartVM = heartVM
+            self.workoutVM?.heartRateQuery = heartVM.currentQuery
+        } else {
+            print ("HeartRateStreaming error")
+            workoutVM?.stopWorkout()
+        }
+    }
+    
+    func updated(with heartRateValue: Double, from deviceName:String) {
+        if heartRateValue > Constants.kHeartRateAccessValue {
+            startClick()
+            return
+        }
+        
+        conectivityClient.sendInfo(heartRateValue, for: Constants.kHeartRateKey)
+        rateLabel.setText(String(UInt16(heartRateValue)))
+        watchNameLabel.setText(deviceName)
+        animateHeart()
     }
     
     // MARK: - Actions
     @IBAction func startClick() {
-        if (self.workoutActive) {
+        if let workout = workoutVM, workout.isActive {
             //finish the current workout
-            self.workoutActive = false
+            workoutVM?.stopWorkout()
+            heartVM = nil
             self.startStopButton.setTitle("Start")
-            if let workout = self.session {
-                healthStore.end(workout)
-            }
         } else {
-            //start a new workout
-            self.workoutActive = true
+            workoutVM?.startWorkout()
             self.startStopButton.setTitle("Stop")
-            startWorkout()
-        }
-    }
-    
-    func createHeartRateStreamingQuery(_ workoutStartDate: Date) -> HKQuery? {
-        
-        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else { return nil }
-        let datePredicate = HKQuery.predicateForSamples(withStart: workoutStartDate, end: nil, options: .strictEndDate )
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates:[datePredicate])
-        
-        let heartRateQuery = HKAnchoredObjectQuery(type: quantityType, predicate: predicate, anchor: nil, limit: Int(HKObjectQueryNoLimit)) { (query, sampleObjects, deletedObjects, newAnchor, error) -> Void in
-            self.updateHeartRate(sampleObjects)
-        }
-        
-        heartRateQuery.updateHandler = {(query, samples, deleteObjects, newAnchor, error) -> Void in
-            self.updateHeartRate(samples)
-        }
-        return heartRateQuery
-    }
-    
-    func updateHeartRate(_ samples: [HKSample]?) {
-        guard let heartRateSamples = samples as? [HKQuantitySample] else {return}
-        
-        DispatchQueue.main.async { [weak self] in
-            guard
-                let sample = heartRateSamples.first,
-                let unit = self?.heartRateUnit  else {return}
-            let value = sample.quantity.doubleValue(for: unit)
-            self?.rateLabel.setText(String(UInt16(value)))
-            
-            // retrieve source from sample
-            let name = sample.sourceRevision.source.name
-            self?.updateDeviceName(name)
-            self?.animateHeart()
         }
     }
 }
 
-extension InterfaceController: HKWorkoutSessionDelegate {
-    func startWorkout() {
-        
-        // If we have already started the workout, then do nothing.
-        guard session == nil else {
-            return
-        }
-        
-        // Configure the workout session.
-        let workoutConfiguration = HKWorkoutConfiguration()
-        workoutConfiguration.activityType = .crossTraining
-        workoutConfiguration.locationType = .indoor
-        
-        do {
-            session = try HKWorkoutSession(configuration: workoutConfiguration)
-            session?.delegate = self
-        } catch {
-            fatalError("Unable to create the workout session!")
-        }
-        
-        healthStore.start(self.session!)
-    }
-    
-    func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
-        switch toState {
-        case .running:
-            workoutDidStart(date)
-        case .ended:
-            workoutDidEnd(date)
-        default:
-            print("Unexpected state \(toState)")
-        }
-    }
-    
-    func workoutDidStart(_ date : Date) {
-        if let query = createHeartRateStreamingQuery(date) {
-            self.currenQuery = query
-            healthStore.execute(query)
-        } else {
-            rateLabel.setText("cannot start")
-        }
-    }
-    
-    func workoutDidEnd(_ date : Date) {
-        healthStore.stop(self.currenQuery!)
-        rateLabel.setText("---")
-        session = nil
-    }
-    
-    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
-        // Do nothing for now
-        print("Workout error")
-    }
-}
-
+// MARK: UI
 extension InterfaceController {
-    func displayNotAllowed() {
-        rateLabel.setText("not allowed")
-    }
-    
-    func updateDeviceName(_ deviceName: String) {
-        watchNameLabel.setText(deviceName)
-    }
-    
     func animateHeart() {
         self.animate(withDuration: 0.5) { [weak self] in
             self?.heart.setWidth(48)

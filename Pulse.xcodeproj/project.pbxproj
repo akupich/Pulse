@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3267F48B1F865D4E0051CFC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3267F48A1F865D4E0051CFC0 /* AppDelegate.swift */; };
-		3267F48D1F865D4E0051CFC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3267F48C1F865D4E0051CFC0 /* ViewController.swift */; };
+		3267F48D1F865D4E0051CFC0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3267F48C1F865D4E0051CFC0 /* WelcomeViewController.swift */; };
 		3267F4901F865D4E0051CFC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3267F48E1F865D4E0051CFC0 /* Main.storyboard */; };
 		3267F4921F865D4F0051CFC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3267F4911F865D4E0051CFC0 /* Assets.xcassets */; };
 		3267F4951F865D4F0051CFC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3267F4931F865D4F0051CFC0 /* LaunchScreen.storyboard */; };
@@ -22,8 +22,13 @@
 		3267F4D01F867A9B0051CFC0 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3267F4CF1F867A9B0051CFC0 /* NotificationController.swift */; };
 		3267F4D21F867A9B0051CFC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3267F4D11F867A9B0051CFC0 /* Assets.xcassets */; };
 		3267F4D71F867A9B0051CFC0 /* WatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3267F4BA1F867A9A0051CFC0 /* WatchApp.app */; };
+		32A939E91F8CE10800BEDB24 /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A939E81F8CE10800BEDB24 /* ConnectivityManager.swift */; };
+		32CAD1E91F8D3649003E02B4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CAD1E81F8D3649003E02B4 /* Constants.swift */; };
+		32CAD1EA1F8D36E2003E02B4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CAD1E81F8D3649003E02B4 /* Constants.swift */; };
+		32CAD1EC1F8D397F003E02B4 /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CAD1EB1F8D397F003E02B4 /* WorkoutViewModel.swift */; };
 		32D66E3C1F86A878000A1960 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D66E3B1F86A878000A1960 /* HealthKit.framework */; };
 		32D66E3F1F86A8DC000A1960 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D66E3E1F86A8DC000A1960 /* HealthKit.framework */; };
+		32DDF7B61F8E6BEA00CF1069 /* HeartRateAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DDF7B51F8E6BEA00CF1069 /* HeartRateAnalyzer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,7 +90,7 @@
 /* Begin PBXFileReference section */
 		3267F4871F865D4E0051CFC0 /* Pulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3267F48A1F865D4E0051CFC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3267F48C1F865D4E0051CFC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3267F48C1F865D4E0051CFC0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		3267F48F1F865D4E0051CFC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3267F4911F865D4E0051CFC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3267F4941F865D4F0051CFC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -107,10 +112,14 @@
 		3267F4D11F867A9B0051CFC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3267F4D31F867A9B0051CFC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3267F4D41F867A9B0051CFC0 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		32A939E81F8CE10800BEDB24 /* ConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityManager.swift; sourceTree = "<group>"; };
+		32CAD1E81F8D3649003E02B4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		32CAD1EB1F8D397F003E02B4 /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
 		32D66E3B1F86A878000A1960 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		32D66E3D1F86A878000A1960 /* Pulse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pulse.entitlements; sourceTree = "<group>"; };
 		32D66E3E1F86A8DC000A1960 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		32D66E401F86A8DC000A1960 /* WatchApp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchApp Extension.entitlements"; sourceTree = "<group>"; };
+		32DDF7B51F8E6BEA00CF1069 /* HeartRateAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateAnalyzer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +164,7 @@
 				3267F4A91F865D4F0051CFC0 /* PulseUITests */,
 				3267F4BB1F867A9B0051CFC0 /* WatchApp */,
 				3267F4CA1F867A9B0051CFC0 /* WatchApp Extension */,
+				32CAD1E71F8D3632003E02B4 /* Shared */,
 				3267F4881F865D4E0051CFC0 /* Products */,
 				32D66E3A1F86A878000A1960 /* Frameworks */,
 			);
@@ -177,7 +187,7 @@
 			children = (
 				32D66E3D1F86A878000A1960 /* Pulse.entitlements */,
 				3267F48A1F865D4E0051CFC0 /* AppDelegate.swift */,
-				3267F48C1F865D4E0051CFC0 /* ViewController.swift */,
+				3267F48C1F865D4E0051CFC0 /* WelcomeViewController.swift */,
 				3267F48E1F865D4E0051CFC0 /* Main.storyboard */,
 				3267F4911F865D4E0051CFC0 /* Assets.xcassets */,
 				3267F4931F865D4F0051CFC0 /* LaunchScreen.storyboard */,
@@ -219,6 +229,7 @@
 			children = (
 				32D66E401F86A8DC000A1960 /* WatchApp Extension.entitlements */,
 				3267F4CB1F867A9B0051CFC0 /* InterfaceController.swift */,
+				32DDF7B71F8E936900CF1069 /* ViewModels */,
 				3267F4CD1F867A9B0051CFC0 /* ExtensionDelegate.swift */,
 				3267F4CF1F867A9B0051CFC0 /* NotificationController.swift */,
 				3267F4D11F867A9B0051CFC0 /* Assets.xcassets */,
@@ -228,6 +239,14 @@
 			path = "WatchApp Extension";
 			sourceTree = "<group>";
 		};
+		32CAD1E71F8D3632003E02B4 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				32CAD1E81F8D3649003E02B4 /* Constants.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		32D66E3A1F86A878000A1960 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +254,16 @@
 				32D66E3B1F86A878000A1960 /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		32DDF7B71F8E936900CF1069 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				32A939E81F8CE10800BEDB24 /* ConnectivityManager.swift */,
+				32DDF7B51F8E6BEA00CF1069 /* HeartRateAnalyzer.swift */,
+				32CAD1EB1F8D397F003E02B4 /* WorkoutViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,8 +476,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3267F48D1F865D4E0051CFC0 /* ViewController.swift in Sources */,
+				3267F48D1F865D4E0051CFC0 /* WelcomeViewController.swift in Sources */,
 				3267F48B1F865D4E0051CFC0 /* AppDelegate.swift in Sources */,
+				32CAD1E91F8D3649003E02B4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,9 +502,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32CAD1EA1F8D36E2003E02B4 /* Constants.swift in Sources */,
 				3267F4D01F867A9B0051CFC0 /* NotificationController.swift in Sources */,
+				32A939E91F8CE10800BEDB24 /* ConnectivityManager.swift in Sources */,
 				3267F4CE1F867A9B0051CFC0 /* ExtensionDelegate.swift in Sources */,
+				32CAD1EC1F8D397F003E02B4 /* WorkoutViewModel.swift in Sources */,
 				3267F4CC1F867A9B0051CFC0 /* InterfaceController.swift in Sources */,
+				32DDF7B61F8E6BEA00CF1069 /* HeartRateAnalyzer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
